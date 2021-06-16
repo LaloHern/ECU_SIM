@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/">
+        <file alias="images/temp.png">../ClusterTDK/images/temp.png</file>
+        <file alias="images/tachometer.png">../ClusterTDK/images/tachometer.png</file>
+        <file alias="images/speedo.png">../ClusterTDK/images/speedo.png</file>
+        <file alias="images/seatbelt.png">../ClusterTDK/images/seatbelt.png</file>
+        <file alias="images/rightArrow.png">../ClusterTDK/images/rightArrow.png</file>
+        <file alias="images/needle.png">../ClusterTDK/images/needle.png</file>
+        <file alias="images/lowTire.png">../ClusterTDK/images/lowTire.png</file>
+        <file alias="images/leftArrow.png">../ClusterTDK/images/leftArrow.png</file>
+        <file alias="images/check.png">../ClusterTDK/images/check.png</file>
+        <file alias="images/battery.png">../ClusterTDK/images/battery.png</file>
+        <file alias="images/ABS.png">../ClusterTDK/images/ABS.png</file>
+        <file alias="images/fuelGauge.png">../ClusterTDK/images/fuelGauge.png</file>
+        <file alias="images/tempGauge.png">../ClusterTDK/images/tempGauge.png</file>
+        <file alias="images/icons/closeIcon.png">../ClusterTDK/images/icons/closeIcon.png</file>
+        <file alias="images/icons/hazardLights_icon.png">../ClusterTDK/images/icons/hazardLights_icon.png</file>
+        <file alias="images/icons/leftArrow_icon.png">../ClusterTDK/images/icons/leftArrow_icon.png</file>
+        <file alias="images/icons/rightArrow_icon.png">../ClusterTDK/images/icons/rightArrow_icon.png</file>
+        <file alias="images/icons/check_icon.png">../ClusterTDK/images/icons/check_icon.png</file>
+        <file alias="images/icons/seatbelt_icon.png">../ClusterTDK/images/icons/seatbelt_icon.png</file>
+        <file alias="images/icons/highBeams_icon.png">../ClusterTDK/images/icons/highBeams_icon.png</file>
+        <file alias="images/icons/lowBeams_icon.png">../ClusterTDK/images/icons/lowBeams_icon.png</file>
+        <file alias="images/highBeams.png">../ClusterTDK/images/highBeams.png</file>
+        <file alias="images/lowBeams.png">../ClusterTDK/images/lowBeams.png</file>
+    </qresource>
+</RCC>

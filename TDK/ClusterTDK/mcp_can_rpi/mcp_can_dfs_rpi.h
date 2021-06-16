@@ -50,7 +50,7 @@
 #endif
 
 #ifndef INT8U
-#define INT8U int
+#define INT8U unsigned char
 #endif
 
 // if print debug information

@@ -163,9 +163,7 @@ Item {
                 speedometer.input = sliderValue
 
                 var simulatedSpeedValue = SimUtils.map(sliderValue, 0, 100, 0, 240)
-
-                //gpiosController.setMsgPayload(0, simulatedSpeedValue)
-                //gpiosController.writeCANMsg(5, 8)
+                gpiosController.speed = simulatedSpeedValue
             }
         }
 
@@ -187,9 +185,6 @@ Item {
 
                 var simulatedRPMValue = SimUtils.map(sliderValue, 0, 100, 0, 8000)
                 gpiosController.engineRpm = simulatedRPMValue
-
-                //gpiosController.writeCANMsg(5, 8)
-                //gpiosController.setMsgPayload(1, simulatedRPMValue)
             }
         }
 
@@ -210,9 +205,6 @@ Item {
                 temperatureIndicator.input = sliderValue
 
                 var simulatedTemperatureValue = SimUtils.map(sliderValue, 0, 100, 0, 130)
-
-                //gpiosController.setMsgPayload(2, simulatedTemperatureValue)
-                //gpiosController.writeCANMsg(5, 8)
             }
         }
 
@@ -233,9 +225,6 @@ Item {
                 fuelIndicator.input = sliderValue
 
                 var simulatedFuelValue = SimUtils.map(sliderValue, 0, 100, 0, 40)
-
-                //gpiosController.writeCANMsg(5, 8)
-                //gpiosController.setMsgPayload(3, simulatedFuelValue)
             }
         }
     }

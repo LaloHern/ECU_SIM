@@ -66,10 +66,10 @@ private:
     bool m_rightTurnLight;
     bool m_leftTurnLight;
 
-    char m_vehVIN[18] = "SCBZK25EXYC813876";
+    unsigned char *m_vehVIN;
 
-    void handleOBDRequest(INT8U *messageData);
-    void processRealTimeDataQuery(INT8U pid);
+    void handleOBDRequest(unsigned char *messageData);
+    void processRealTimeDataQuery(unsigned char pid);
     void processFreezedDataQuery();
     void processDTCQuery();
     void eraseStoredDTC();
