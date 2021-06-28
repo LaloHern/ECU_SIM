@@ -32,6 +32,36 @@ Item {
         }
     }
 
+    Rectangle {
+        color: "white"
+        height: 25
+        width: 25
+        radius: 3
+
+        anchors {
+            right: parent.right
+            top: parent.top
+            topMargin: 10
+            rightMargin: 10
+        }
+
+        Image {
+            anchors {
+                fill: parent
+                margins: 1
+            }
+
+            source: "qrc:/images/icons/closeIcon.png"
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                closeDrawer()
+            }
+        }
+    }
+
     Text {
         anchors {
             horizontalCenter: parent.horizontalCenter
@@ -140,137 +170,21 @@ Item {
         }
     }
 
-    Text {
+    Button {
+        id: checkEngineControl
         anchors {
+            top: parent.top
+            topMargin: 300
             horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: 290
         }
 
-        text: "Luces"
-        horizontalAlignment: Text.AlignHCenter
-        color: "white"
-    }
+        width: parent.width - 20
+        height: 40
+        opacity: 0.95
+        label: "Simular Falla"
 
-    Row {
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: 320
-        }
-
-        spacing: 10
-        enabled: controlsEnabled
-        opacity: controlsEnabled ? 1 : 0.5
-
-        property double delegateCellWidth: (parent.width - (spacing * 2) - 20) / 2
-
-        Button {
-            id: lowBeamsControl
-
-            width: parent.delegateCellWidth
-            height: 40
-            opacity: 0.95
-            icon: "qrc:/images/icons/lowBeams_icon.png"
-
-            onButtonClicked: {
-                lowBeam()
-            }
-        }
-
-        Button {
-            id: highBeamsControl
-
-            width: parent.delegateCellWidth
-            height: 40
-            opacity: 0.95
-            icon: "qrc:/images/icons/highBeams_icon.png"
-
-            onButtonClicked: {
-                highBeams()
-            }
-        }
-    }
-
-    Text {
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: 390
-        }
-
-        text: "Testigos"
-        horizontalAlignment: Text.AlignHCenter
-        color: "white"
-    }
-
-    Row {
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: 420
-        }
-
-        spacing: 10
-        enabled: controlsEnabled
-        opacity: controlsEnabled ? 1 : 0.5
-
-        property double delegateCellWidth: (parent.width - (spacing * 2) - 20) / 2
-
-        Button {
-            id: checkEngineControl
-
-            width: parent.delegateCellWidth
-            height: 40
-            opacity: 0.95
-            icon: "qrc:/images/icons/check_icon.png"
-
-            onButtonClicked: {
-                checkEngine()
-            }
-        }
-
-        Button {
-            id: seatBeltsControl
-
-            width: parent.delegateCellWidth
-            height: 40
-            opacity: 0.95
-            icon: "qrc:/images/icons/seatbelt_icon.png"
-
-            onButtonClicked: {
-                seatBelt()
-            }
-        }
-    }
-
-    Rectangle {
-        color: "white"
-        height: 25
-        width: 25
-        radius: 3
-
-        anchors {
-            right: parent.right
-            top: parent.top
-            topMargin: 10
-            rightMargin: 10
-        }
-
-        Image {
-            anchors {
-                fill: parent
-                margins: 1
-            }
-
-            source: "qrc:/images/icons/closeIcon.png"
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                closeDrawer()
-            }
+        onButtonClicked: {
+            checkEngine()
         }
     }
 }
