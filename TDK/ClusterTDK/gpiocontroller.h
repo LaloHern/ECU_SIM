@@ -7,6 +7,7 @@
 #include "obdDefinitions.h"
 
 #include <QVariant>
+#include <QThread>
 
 class GPIOController : public QObject
 {
@@ -21,11 +22,13 @@ class GPIOController : public QObject
     Q_PROPERTY(int fuelLevel READ fuelLevel WRITE setFuelLevel NOTIFY fuelLevelChanged)
     Q_PROPERTY(bool leftTurnLight READ leftTurnLight WRITE setLeftTurnLight NOTIFY leftTurnLightChanged)
     Q_PROPERTY(bool rightTurnLight READ rightTurnLight WRITE setRightTurnLight NOTIFY rightTurnLightChanged)
+    Q_PROPERTY(bool malfunctionIndicator READ malfunctionIndicator WRITE setMalfunctionIndicator NOTIFY malfunctionIndicatorChanged)
 
     Q_DISABLE_COPY(GPIOController);
 
 public:
     GPIOController();
+    ~GPIOController();
     INT32U m_canMsgId;
     INT8U m_canMsgDLC;
     INT8U m_canMsgData[MAX_CHAR_IN_MESSAGE];
@@ -50,11 +53,19 @@ public:
     void setLeftTurnLight (bool value);
     void setRightTurnLight (bool value);
 
+    void setMalfunctionIndicator(bool value);
+    bool malfunctionIndicator();
+
+    void handleOBDRequest();
+    void processRealTimeDataQuery(unsigned char pid);
+    void processFreezedDataQuery();
+    void processDTCQuery();
+    void eraseStoredDTC();
+    void vehicleInfoReply();
+
 private:
     QTimer m_pollTimer;
     MCP_CAN can;
-
-    INT8U m_canMsg;
 
     int m_speed;
     int m_engineRpm;
@@ -63,17 +74,30 @@ private:
     int m_intakeAirTemp;
     int m_mafAirFloRate;
 
+    bool m_malfunctionIndicator;
+
     bool m_rightTurnLight;
-    bool m_leftTurnLight;
+    bool m_leftTurnLight;    
+    unsigned char m_obdMode;
+    unsigned char m_obdPID;
 
-    unsigned char *m_vehVIN;
+    //thread class used to separate the CAN bus write process
+    //from the main program thread
+    class WriteCANThread: public QThread
+    {
+    public:
+        WriteCANThread(GPIOController *parent = 0);
 
-    void handleOBDRequest(unsigned char *messageData);
-    void processRealTimeDataQuery(unsigned char pid);
-    void processFreezedDataQuery();
-    void processDTCQuery();
-    void eraseStoredDTC();
-    void vehicleInfoReply();
+    protected:
+        void run();
+
+    private:
+        GPIOController *m_parent;
+
+        friend class GPIOController;
+    };
+
+    WriteCANThread m_writeCANThread;
 
 signals:
     void speedChanged();
@@ -82,6 +106,7 @@ signals:
     void fuelLevelChanged();
     void leftTurnLightChanged();
     void rightTurnLightChanged();
+    void malfunctionIndicatorChanged();
 
 public slots:
     void pollLoop();

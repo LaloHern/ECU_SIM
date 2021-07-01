@@ -19,12 +19,11 @@ Item {
     Connections {
         target: gpiosController
 
-        enabled: datapool.operationMode === datapool._ReceiverMode
-
         onSpeedChanged: speedometer.input = gpiosController.speed
         onEngineRpmChanged: tachometerIndicator.input = gpiosController.engineRpm
         onEngineTempChanged: temperatureIndicator.input = gpiosController.engineTemp
         onFuelLevelChanged: fuelIndicator.input = gpiosController.fuelLevel
+        onMalfunctionIndicatorChanged: rtts.checkEngine = gpiosController.malfunctionIndicator
     }
 
     Tacometro {
@@ -205,6 +204,7 @@ Item {
                 temperatureIndicator.input = sliderValue
 
                 var simulatedTemperatureValue = SimUtils.map(sliderValue, 0, 100, 0, 130)
+                gpiosController.engineTemp = simulatedTemperatureValue
             }
         }
 
@@ -223,8 +223,7 @@ Item {
 
             onSliderValueChanged: {
                 fuelIndicator.input = sliderValue
-
-                var simulatedFuelValue = SimUtils.map(sliderValue, 0, 100, 0, 40)
+                gpiosController.fuelLevel = sliderValue
             }
         }
     }
@@ -279,10 +278,10 @@ Item {
         onTurnRight: turnLights.rightSequence = !turnLights.rightSequence
         onEmergencyLights:turnLights.emergencySequence = !turnLights.emergencySequence
 
-        onCheckEngine: rtts.checkEngine = !rtts.checkEngine
-        onLowBeam: rtts.lowBeams = !rtts.lowBeams
-        onHighBeams: rtts.highBeams = !rtts.highBeams
-        onSeatBelt: rtts.seatBelts = !rtts.seatBelts
+        onCheckEngine: {
+            rtts.checkEngine = !rtts.checkEngine
+            gpiosController.malfunctionIndicator = rtts.checkEngine
+        }
 
         onCloseDrawer: width = 0
     }

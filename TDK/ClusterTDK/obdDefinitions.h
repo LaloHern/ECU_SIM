@@ -16,7 +16,7 @@ enum OBDMode {
 enum OBDRplyMode {
     RealTimeRply = 0x41,
     FreezeDataRply,
-    DTCRply,
+    DTCRply = 0x43,
     EraseDTCRply,
     VehicleInfoRply = 0x49
 };
@@ -29,6 +29,6 @@ enum PIDS {
     MAF = 16,
     SecondSUpportedPIDs = 32,
     FuelLevel = 0x2F,
-    EngineCoolantTemperature = 0x67
+    EngineCoolantTemperature = 0x05
 };
 #endif // OBDDEFINITIONS_H
